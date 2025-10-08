@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>黄河文化首页</title>
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    /* 重置默认样式 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    /* 强制移动端布局 */
+    body {
+      min-width: 320px;
+      max-width: 100vw;
+      overflow-x: hidden;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    
+    .hero { 
+      position: relative; 
+      min-height: 100vh; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      background: none; 
+      color: #4a3728; 
+      overflow: hidden; 
+      width: 100vw;
+    }
+    
+    .hero-bg { 
+      position: absolute; 
+      inset: 0; 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; /* 改为cover保持比例 */
+      z-index: -1; 
+    }
+    
+    .nav-buttons { 
+      position: absolute; 
+      bottom: 80px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      display: flex; 
+      flex-direction: column; /* 改为垂直排列 */
+      gap: 20px; 
+      width: 90%; 
+      max-width: 300px; 
+      z-index: 10; 
+    }
+    
+    .nav-btn { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; /* 居中内容 */
+      gap: 12px; 
+      padding: 18px 20px; 
+      background: rgba(255,255,255,0.95); 
+      border: 2px solid #8f6a2e; 
+      border-radius: 12px; 
+      color: #5c3b1f; 
+      font-size: 18px; 
+      font-weight: 600; 
+      cursor: pointer; 
+      transition: all 0.3s ease; 
+      backdrop-filter: blur(10px); 
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1); 
+      text-decoration: none; 
+      width: 100%; 
+    }
+    
+    .nav-btn:hover { 
+      background: rgba(255,255,255,1); 
+      transform: translateY(-2px); 
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15); 
+      border-color: #a97c3f; 
+    }
+    
+    .btn-icon { 
+      font-size: 24px; 
+      flex-shrink: 0;
+    }
+    
+    .btn-text { 
+      white-space: nowrap; 
+      font-size: 18px;
+    }
+    
+    /* 针对PC的微调（保持移动端风格但稍作优化） */
+    @media (min-width: 768px) {
+      .nav-buttons {
+        bottom: 100px;
+        max-width: 400px;
+      }
+      
+      .nav-btn {
+        padding: 20px 30px;
+        font-size: 20px;
+      }
+      
+      .btn-icon {
+        font-size: 28px;
+      }
+    }
+    
+    /* 超小屏幕适配 */
+    @media (max-width: 320px) {
+      .nav-buttons {
+        bottom: 60px;
+        gap: 15px;
+      }
+      
+      .nav-btn {
+        padding: 15px 18px;
+        font-size: 16px;
+      }
+      
+      .btn-icon {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <img class="hero-bg" src="./images/title.jpg" alt="黄河文化背景" />
+    <div class="nav-buttons">
+      <a class="nav-btn" href="river.html">
+        <span class="btn-icon">🌊</span>
+        <span class="btn-text">黄河长卷</span>
+      </a>
+      <a class="nav-btn" href="artifacts.html">
+        <span class="btn-icon">🏺</span>
+        <span class="btn-text">文物档案</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
