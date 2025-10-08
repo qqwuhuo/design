@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>首页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Microsoft YaHei', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .hero { 
+      position: relative; 
+      min-height: 100vh; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      background: none; 
+      color: #4a3728; 
+      overflow: hidden; 
+    }
+    
+    .hero-bg { 
+      position: absolute; 
+      inset: 0; 
+      width: 100vw; 
+      height: 100vh; 
+      object-fit: cover; 
+      z-index: -1; 
+    }
+    
+    .nav-buttons { 
+      position: absolute; 
+      bottom: 80px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      display: flex; 
+      gap: 15px; 
+      z-index: 10; 
+      width: 90%; 
+      max-width: 800px; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+    }
+    
+    .nav-btn { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      gap: 8px; 
+      padding: 12px 16px; 
+      background: rgba(255,255,255,0.9); 
+      border: 2px solid #8f6a2e; 
+      border-radius: 10px; 
+      color: #5c3b1f; 
+      font-size: 15px; 
+      font-weight: 600; 
+      cursor: pointer; 
+      transition: all 0.3s ease; 
+      backdrop-filter: blur(10px); 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+      text-decoration: none; 
+      flex: 1 1 auto; 
+      min-width: 120px; 
+      max-width: 200px; 
+    }
+    
+    .nav-btn:hover { 
+      background: rgba(255,255,255,1); 
+      transform: translateY(-2px); 
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15); 
+      border-color: #a97c3f; 
+    }
+    
+    .btn-icon { 
+      font-size: 18px; 
+    }
+    
+    .btn-text { 
+      white-space: nowrap; 
+    }
+    
+    @media (max-width: 768px) {
+      .nav-buttons {
+        bottom: 60px; 
+        gap: 12px; 
+        width: 95%; 
+      }
+      
+      .nav-btn {
+        padding: 10px 12px; 
+        font-size: 14px; 
+        min-width: 100px; 
+      }
+      
+      .btn-icon {
+        font-size: 16px; 
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .nav-buttons {
+        flex-direction: column; 
+        align-items: center; 
+        gap: 10px; 
+        bottom: 40px; 
+      }
+      
+      .nav-btn {
+        width: 80%; 
+        max-width: 250px; 
+        padding: 12px; 
+      }
+      
+      .btn-text {
+        font-size: 15px; 
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .nav-btn {
+        width: 90%; 
+        font-size: 13px; 
+      }
+      
+      .btn-icon {
+        font-size: 15px;
+      }
+    }
+      .footer {
+      background: #2e2e2e;
+      color: #b0b0b0;
+      padding: 10px;
+      text-align: center;
+      font-size: 10px;
+      border-top: 1px solid #444;
+    }
+    
+    .footer-text {
+      margin: 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <img class="hero-bg" src="./images/title.jpg" alt="黄河文化背景" />
+    <div class="nav-buttons">
+      <a class="nav-btn" href="river.html">
+        <span class="btn-icon">🌊</span>
+        <span class="btn-text">黄河长卷</span>
+      </a>
+      <a class="nav-btn" href="artifacts.html">
+        <span class="btn-icon">🏺</span>
+        <span class="btn-text">文物档案</span>
+      </a>
+      <a class="nav-btn" href="modern.html">
+        <span class="btn-icon">🏙️</span>
+        <span class="btn-text">当代创新</span>
+      </a>
+    </div>
+  </div>
+  <footer class="footer">
+    <p class="footer-text">© 2025 黄河文明·根脉河南 | Created by 王雨昕</p>
+    <p class="footer-text">河南开封科技传媒学院</p>
+  </footer>
+</body>
+</html>

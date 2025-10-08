@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>当代创新</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: url('./images/modern.jpg');
+            background-size: cover;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .page-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            margin-top: 20px;
+        }
+        
+        .timeline-axis {
+            position: absolute;
+            left: 20px;
+            width: 4px;
+            height: 85%;
+            background: linear-gradient(to bottom, #2e7d32, #4caf50);
+            border-radius: 2px;
+            z-index: 1;
+        }
+        
+        .timeline-dots {
+            position: relative;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 20px;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dot-large {
+            width: 50px;
+            height: 50px;
+            background: #2e7d32;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 3px #2e7d32, 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .dot-small {
+            width: 20px;
+            height: 20px;
+            background: #4caf50;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #4caf50;
+        }
+        
+        .dot-label {
+            position: absolute;
+            left: 60px;
+            white-space: nowrap;
+            font-size: 14px;
+            color: #2e7d32;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .dot-large:hover .dot-label {
+            opacity: 1;
+        }
+        
+        .card {
+            position: absolute;
+            position: absolute;
+            right: 50%; 
+            top: 40%;
+            transform: translateY(-50%);
+            width: 260px; 
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            padding: 16px;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            z-index: 10;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .card.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+         .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .card-desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+         .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-tag {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .card-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 10px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            background: #f44336;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 90px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.9);
+            border: 2px solid #0c4127;
+            border-radius: 8px;
+            color: #35e5b9;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(29, 163, 105, 0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(9, 56, 45, 0.3);
+            border-color: #229d66;
+            color: #105224;
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                
+                left: 20%;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .card {
+               
+                left: 20%;
+            }
+            
+            .dot-label {
+                left: 55px;
+            }
+        }
+        .footer {
+      background: #2e2e2e;
+      color: #b0b0b0;
+      padding: 10px;
+      text-align: center;
+      font-size: 10px;
+      border-top: 1px solid #444;
+    }
+    
+    .footer-text {
+      margin: 0;
+      line-height: 1.5;
+    }
+    </style>
+</head>
+<body>
+    <a class="back-btn" href="index.html">
+        <span>←</span>
+        <span>返回首页</span>
+    </a>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="page-title">黄河文化活态传承</h1>
+            <p class="page-subtitle">点击左侧节点探索河南黄河文化的当代创新与实践</p>
+        </div>
+        
+        <div class="timeline-container">
+            <div class="timeline-axis"></div>
+            
+            <div class="timeline-dots">
+              
+                <div class="timeline-dot dot-small" style="top: 15%;"></div>
+                <div class="timeline-dot dot-small" style="top: 39%;"></div>
+                <div class="timeline-dot dot-small" style="top: 48%;"></div>
+                <div class="timeline-dot dot-small" style="top: 63%;"></div>
+                <div class="timeline-dot dot-small" style="top: 85%;"></div>
+           
+                <div class="timeline-dot dot-large" style="top: 0%;" onclick="toggleCard(0)">
+                    <span class="dot-label">黄河非遗展示馆</span>
+                </div>
+              
+                <div class="timeline-dot dot-large" style="top: 25%;" onclick="toggleCard(1)">
+                    <span class="dot-label">洛阳黄河文化创意园</span>
+                </div>
+                
+               
+                <div class="timeline-dot dot-large" style="top: 48%;" onclick="toggleCard(2)">
+                    <span class="dot-label">清明上河园实景演出</span>
+                </div>
+                
+               
+                <div class="timeline-dot dot-large" style="top: 70%;" onclick="toggleCard(3)">
+                    <span class="dot-label">郑州黄河生态走廊</span>
+                </div>
+            </div>
+             <div class="card" id="card-0">
+                <div class="close-btn" onclick="closeCard(0)">×</div>
+                <img src="./images/culture/1.jpg" alt="黄河非遗展示馆" class="card-image">
+                <h3 class="card-title">黄河非遗展示馆</h3>
+                <p class="card-desc">位于郑州黄河文化公园核心区，建筑面积5000平方米，集中展示黄河流域9省市非物质文化遗产项目。通过VR/AR技术还原传统技艺场景，让游客沉浸式体验黄河文化的魅力。</p>
+                <div class="card-features">
+                    <span class="feature-tag">数字展陈</span>
+                    <span class="feature-tag">互动体验</span>
+                    <span class="feature-tag">非遗传承</span>
+                </div>
+                <div class="card-info">
+                    <span class="info-item">📍 郑州黄河文化公园</span>
+                    <span class="info-item">🕒 9:00-17:00</span>
+                </div>
+            </div>
+            
+            <div class="card" id="card-1">
+                <div class="close-btn" onclick="closeCard(1)">×</div>
+                <img src="./images/culture/2.jpg" alt="洛阳黄河文化创意园" class="card-image">
+                <h3 class="card-title">洛阳黄河文化创意园</h3>
+                <p class="card-desc">依托洛阳十三朝古都文化底蕴，打造集文创设计、产品研发、展示销售于一体的创意产业园区。园区内设有唐三彩创新工坊、河洛文化体验馆等特色空间。</p>
+                <div class="card-features">
+                    <span class="feature-tag">文创设计</span>
+                    <span class="feature-tag">传统工艺</span>
+                    <span class="feature-tag">创新转化</span>
+                </div>
+                <div class="card-info">
+                    <span class="info-item">📍 洛阳洛龙区</span>
+                    <span class="info-item">🕒 8:30-18:00</span>
+                </div>
+            </div>
+            
+            
+            <div class="card" id="card-2">
+                <div class="close-btn" onclick="closeCard(2)">×</div>
+                <img src="./images/culture/3.jpg" alt="清明上河园实景演出" class="card-image">
+                <h3 class="card-title">清明上河园实景演出</h3>
+                <p class="card-desc">以北宋张择端《清明上河图》为蓝本，1:1还原汴京繁华景象。演出汇集300余名演员，运用现代声光电技术，再现千年古都的市井生活与商业繁荣。</p>
+                <div class="card-features">
+                    <span class="feature-tag">实景演艺</span>
+                    <span class="feature-tag">历史再现</span>
+                    <span class="feature-tag">沉浸体验</span>
+                </div>
+                <div class="card-info">
+                    <span class="info-item">📍 开封龙亭区</span>
+                    <span class="info-item">🕒 19:30-21:00</span>
+                </div>
+            </div>
+            
+        
+            <div class="card" id="card-3">
+                <div class="close-btn" onclick="closeCard(3)">×</div>
+                <img src="./images/culture/4.jpg" alt="郑州黄河生态走廊" class="card-image">
+                <h3 class="card-title">郑州黄河生态走廊</h3>
+                <p class="card-desc">全长120公里的生态文化长廊，串联起黄河湿地公园、黄河博物馆等景点。走廊内设有骑行道、观景台，是集生态保护、文化展示、休闲观光于一体的城市绿肺。</p>
+                <div class="card-features">
+                    <span class="feature-tag">生态保护</span>
+                    <span class="feature-tag">文化长廊</span>
+                    <span class="feature-tag">休闲观光</span>
+                </div>
+                <div class="card-info">
+                    <span class="info-item">📍 郑州惠济区</span>
+                    <span class="info-item">🕒 全天开放</span>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <script>
+    // 卡片切换功能
+        let activeCard = null;
+        
+        function toggleCard(cardIndex) {
+          
+            if (activeCard !== null) {
+                document.getElementById(`card-${activeCard}`).classList.remove('active');
+            }
+            
+            
+            if (activeCard === cardIndex) {
+                activeCard = null;
+                return;
+            }
+            
+            
+            document.getElementById(`card-${cardIndex}`).classList.add('active');
+            activeCard = cardIndex;
+        }
+        
+        function closeCard(cardIndex) {
+            document.getElementById(`card-${cardIndex}`).classList.remove('active');
+            if (activeCard === cardIndex) {
+                activeCard = null;
+            }
+        }
+        
+        document.addEventListener('click', function(e) {
+            if (!e.target.classList.contains('dot-large') && 
+                !e.target.classList.contains('timeline-dot') &&
+                !e.target.closest('.card')) {
+                if (activeCard !== null) {
+                    document.getElementById(`card-${activeCard}`).classList.remove('active');
+                    activeCard = null;
+                }
+            }
+        });
+    </script>
+    <footer class="footer">
+    <p class="footer-text">© 2025 黄河文明·根脉河南 | Created by 王雨昕</p>
+    <p class="footer-text">河南开封科技传媒学院</p>
+  </footer>
+</body>
+</html>
